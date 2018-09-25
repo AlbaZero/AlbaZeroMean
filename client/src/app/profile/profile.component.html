@@ -1,0 +1,215 @@
+<div class="container">
+    <form>
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Ny Profil</h1>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" (click)="editProfile()">Visa Profil</button>
+                <button type="submit" (click)="editMissions()">Visa Uppdrag</button>
+                <button (click)="createProfile()">Spara</button>
+            </div>
+        </div>
+
+
+      <div [hidden]="!showProfile">
+    
+
+
+  <div class="form-group">
+    <label for="name">Namn:</label>
+    <input [(ngModel)]="currentProfile.name" name="name" type="text" class="form-control" id="name" required>
+  </div>
+
+  <label>Nyckelord:</label>
+  <div class="input-group mb-3">           
+      <input value="{{newKeyword}}" #newKey type="text" class="form-control">
+      <div class="input-group-append">
+        <button (click)="addKeyword(newKey.value)">Add</button>
+      </div>
+  </div>
+  <div>
+    <ul>
+      <li *ngFor="let keyword of currentProfile.keywords">
+        <span>{{keyword}}</span>
+      </li>
+    </ul>
+  </div>
+
+
+  <div class="form-group">
+    <label for="description">Beskrivning:</label>
+    <textarea rows="6" [(ngModel)]="currentProfile.description" name="description" class="form-control" id="description" required></textarea>
+  </div>
+
+  <div class="row">
+      <div class="col-md-4">
+        <label>Kompetensområde:</label>
+          <div class="input-group">
+              <input #newCompetence type="text">
+              <div class="input-group-append">
+                <button (click)="addCompetence(newCompetence.value)">Add</button>
+              </div>
+          </div>
+          <div>
+            <ul>
+              <li *ngFor="let competence of currentProfile.competencies">
+                <span>{{competence}}</span>
+              </li>
+            </ul>
+          </div>
+      </div>
+    
+      <div class="col-md-4">
+        <label>Utbildningar/Certiferingar:</label>
+        <div class="input-group">
+          <input #neweducation type="text">
+          <div class="input-group-append">
+            <button (click)="addEducation(neweducation.value)">Add</button>
+          </div>
+        </div>
+        <div>
+            <ul>
+              <li *ngFor="let education of currentProfile.educations">
+                <span>{{education}}</span></li>
+            </ul>    
+        </div>
+      </div>
+
+      <div class="col-md-4">
+          <label>Språkkunskaper:</label>
+          <div class="input-group">
+            <input #newLanguage type="text">
+            <div class="input-group-append">
+              <button (click)="addLanguage(newLanguage.value)">Add</button>
+            </div>
+          </div>
+          <div>
+          <ul>
+            <li *ngFor="let language of currentProfile.languages">
+              <span>{{language}}</span>
+            </li>
+          </ul>
+          </div>
+        </div>
+  </div>
+
+<hr>
+ 
+  <div class="row">
+      <div class="col-md-4">
+          <label>Programmerings- och scriptspråk:</label>
+          <div class="input-group">
+              <select class="form-control" #newPLanguage >
+                <option *ngFor="let key of _lookups.languages" value={{key}}>{{key}}</option>
+                <!--<option value="Java">Java</option>-->
+                <!--<option value="vb">vb</option>-->
+              </select>
+              <div class="input-group-append">
+                <button (click)="addProgrammingLanguage(newPLanguage.value)">Add</button>
+              </div>
+          </div>
+          <div>
+              <ul>
+                <li *ngFor="let pLanguage of currentProfile.programmingLanguages">
+                  <span>{{pLanguage}}</span></li>
+              </ul>
+          </div>
+      </div>
+  
+    <div class="col-md-4">
+        <label>Databaser:</label>
+        <div class="input-group">
+          <!--<input #newDatabase type="text">-->
+          <select class="form-control" #newDatabase >
+            <option *ngFor="let key of _lookups.databases" value={{key}}>{{key}}</option>
+          </select>
+          <div class="input-group-append">
+            <button (click)="addDatabase(newDatabase.value)">Add</button>
+          </div>
+        </div>
+        <div>
+          <ul>
+            <li *ngFor="let database of currentProfile.databases">
+              <span>{{database}}</span>
+            </li>
+          </ul>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <label>Teknologier:</label>
+        <div class="input-group">
+          <!--<input #newTechnique type="text">-->
+          <select class="form-control" #newTechnique >
+            <option *ngFor="let key of _lookups.techniques" value={{key}}>{{key}}</option>
+          </select>
+          <div class="input-group-append">
+            <button (click)="addTechnique(newTechnique.value)">Add</button>
+          </div>
+        </div>
+        <div>
+          <ul>
+            <li *ngFor="let technique of currentProfile.techniques">
+              <span>{{technique}}</span>
+            </li>
+          </ul>
+        </div>
+    </div>
+
+  </div>
+</div>
+  <div [hidden]=!showMissions>
+  
+      <div class="form-group">
+          <label for="company">Företag:</label>
+          <input type="text" name="company" class="form-control" [(ngModel)]="newMission.company" required>
+        </div>
+
+        <div class="form-group">
+          <label for="startdate">Startdatum:</label>
+          <input type="text" name="startdate" class="form-control" [(ngModel)]="newMission.startdate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="enddate">Slutdatum:</label>
+          <input type="text" name="enddate" class="form-control" [(ngModel)]="newMission.enddate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="role">Roll:</label>
+            <input type="text" name="role" class="form-control" [(ngModel)]="newMission.role" required>
+          </div>
+      
+          <div class="form-group">
+              <label for="techniques2">Tekniker:</label>
+              <input type="text" name="techniques2" class="form-control" [(ngModel)]="newMission.techniques" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="description2">Beskrivning:</label>
+                <textarea rows="3" name="description2" class="form-control" [(ngModel)]="newMission.description" required></textarea>
+              </div>
+       
+            <button (click)="addMission()">Add</button>
+
+
+  
+    <hr>
+  
+    <ol *ngFor="let m of currentProfile.missions">
+        <li >
+          <table class="table">
+            <tr><th>Företag</th><th>{{m.company}}</th><th>{{m.startdate}} - {{m.enddate}}</th>Edit<th></th></tr>
+            <tr><th>Roll</th><td>{{m.role}}</td></tr>
+            <tr><th>Teknik</th><td>{{m.techniques}}</td></tr>
+            <tr><th>Beskrivning</th><td>{{m.description}}</td></tr>
+          </table>
+          
+        </li>
+      </ol>
+
+    </div>
+ 
+</form>
+</div>

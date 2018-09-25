@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+                <h5>Konsulter</h5>
+                <!--<span *ngIf="currentProfile"{{ currentProfile.name}}></span>-->
+                <span (click)="setShowProfile()">Profil</span>
+
+                <ul class="profiles">
+                    <li *ngFor="let p of profiles" [class.selected]="profile === currentProfile" (click)="onSelect(p)">
+                    <span class="">{{p.name}}</span>
+                    </li>
+                </ul>
+        </div>
+        
+        <div class="col-md-10">
+            <app-showProfiles [currentProfile]="currentProfile" [show]="showProfile"></app-showProfiles>
+            <app-showMissions [currentProfile]="currentProfile" [show]="!showProfile"></app-showMissions>
+        </div>
+
+<!--
+        <div class="col-md-5">
+                <app-showProfiles [currentProfile]="currentProfile" [show]="showProfile"></app-showProfiles>
+        </div>
+        
+        <div class="col-md-5">
+                <app-showMissions [currentProfile]="currentProfile" [show]="!showProfile"></app-showMissions>
+        </div>
+    </div>
+-->
+</div>
+
+
+
+
+
+
+
+
+
+
+

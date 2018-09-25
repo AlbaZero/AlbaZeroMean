@@ -1,0 +1,172 @@
+<div *ngIf="currentProfile && show">
+
+  <div class="container">
+        <!--<form #profileForm="ngForm" (ngSubmit)="updateProfile()">(ngSubmit)="onSubmit()"-->
+        <form>
+          <div class="">
+            <span>Profil</span>
+            <span><button class="btn btn-light" (click)="setEditMode()">{{buttonText}}</button></span>
+            
+          </div>
+<!--
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Profil</h5>
+            </div>
+           <div class="col-md-6"><button (click)="setEditMode()">Edit</button><button (click)="updateProfile()">Spara</button></div>
+        </div>
+  -->  
+<!--    
+      <div class="">
+        <label for="name">Namn:</label>
+        <input value="{{currentProfile.name}}" name="name" type="text" class="form-control" id="name" required>
+      </div>
+    -->    
+    
+      <div class="">
+          <label>Nyckelord:</label>
+          
+          <ul>
+            <li *ngFor="let keyword of currentProfile.keywords">
+              <span>{{keyword}}</span>
+            </li>
+            <li *ngFor="let keyword2 of tmpkeywords">
+              <span>{{ keyword2 }}</span>
+            </li>
+          </ul>
+          <span [(hidden)]="!editMode">
+              <input type="text" #inputKeyword> <button (click)="addKeyword(inputKeyword.value)">Add</button>
+            </span>
+        </div>
+    
+    
+      <div class="row">
+        <div class="col-md-12">
+          <label for="description">Beskrivning:</label>
+          <!--<span>{{currentProfile.description}}</span>-->
+            <textarea [(readonly)]="!editMode" rows="10" [(ngModel)]="currentProfile.description" name="description" class="form-control" id="description" required></textarea>
+        </div>
+      </div>
+    
+      <div class="row">
+          <div class="col-md-4">
+              <label>Kompetensområde:</label>
+              <ul>
+                <li *ngFor="let competence of currentProfile.competencies">
+                  <span>{{competence}}</span>
+                </li>
+                <li *ngFor="let competence2 of tmpcompetencies">
+                  <span>{{ competence2 }}</span>
+                </li>
+              </ul>
+              <div [(hidden)]="!editMode">
+                <div class="input-group-append">
+                  <input type="text" #inputCompetencies> <button (click)="addCompetencies(inputCompetencies.value)">Add</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+                <label>Utbildningar/Certiferingar:</label>
+                <ul>
+                  <li *ngFor="let education of currentProfile.educations">
+                    <span>{{education}}</span>
+                  </li>
+                  <li *ngFor="let education2 of tmpeducations">
+                    <span>{{ education2 }}</span>
+                  </li>
+                </ul>
+                <div [(hidden)]="!editMode">
+                    <div class="input-group-append">
+                      <input type="text" #inputEducations> <button (click)="addEducations(inputEducations.value)">Add</button>
+                    </div>
+                </div>
+          </div>
+
+          <div class="col-md-4">
+              <label>Språkkunskaper:</label>
+              <ul>
+                <li *ngFor="let language of currentProfile.languages">
+                  <span>{{language}}</span>
+                </li>
+                <li *ngFor="let language2 of tmplanguages">
+                  <span>{{ language2 }}</span>
+                </li>
+              </ul>
+              <div [(hidden)]="!editMode">
+                  <div class="input-group-append">
+                  <input type="text" #inputLanguages> <button (click)="addLanguages(inputLanguages.value)">Add</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    
+      <div class="row">
+        <div class="col-md-4">
+            <label>Programmerings- och scriptspråk:</label>
+            <ul>
+              <li *ngFor="let pLanguage of currentProfile.programmingLanguages">
+                <span>{{pLanguage}}</span>
+              </li>
+              <li *ngFor="let planguage2 of tmpprogrammingLanguages">
+                <span>{{ planguage2 }}</span>
+              </li>
+            </ul>
+
+            <div [(hidden)]="!editMode" class="input-group">
+                <select class="form-control" #newPLanguage >
+                  <option *ngFor="let key of _lookups.languages" value={{key}}>{{key}}</option>
+                </select>
+                <div class="input-group-append">
+                  <button (click)="addProgrammingLanguage(newPLanguage.value)">Add</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <label>Databaser:</label>
+            <ul>
+              <li *ngFor="let database of currentProfile.databases">
+                <span>{{ database }}</span>
+              </li>
+              <li *ngFor="let database2 of tmpdatabases">
+                <span>{{ database2 }}</span>
+              </li>
+            </ul>
+          
+            <div [(hidden)]="!editMode" class="input-group">
+              <select class="form-control" #newDatabase >
+                <option *ngFor="let key of _lookups.databases" value={{key}}>{{key}}</option>
+              </select>
+              <div class="input-group-append">
+                <button (click)="addDatabase(newDatabase.value)">Add</button>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <label>Teknologier:</label>
+            <ul>
+              <li *ngFor="let technique of currentProfile.techniques">
+                <span>{{ technique }}</span>
+              </li>
+              <li *ngFor="let technique2 of tmptechniques">
+                <span>{{ technique2 }}</span>
+              </li>  
+            </ul>
+            <div [(hidden)]="!editMode" class="input-group">
+              <select class="form-control" #newTechnique >
+                <option *ngFor="let key of _lookups.techniques" value={{key}}>{{key}}</option>
+              </select>
+              <div [hidden]="!editMode" class="input-group-append">
+                <button (click)="addTechnique(newTechnique.value)">Add</button>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <span [hidden]="!editMode"><button class="btn" (click)="updateProfile()">Spara</button></span>
+      <!--<button type="submit" class="btn btn-success" [disabled]="!profileForm.form.valid">Save</button>-->
+
+    </form>
+</div>

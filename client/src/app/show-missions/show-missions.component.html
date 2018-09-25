@@ -1,0 +1,59 @@
+<div *ngIf="currentProfile && show">
+  <form>
+    <div class="container">
+        <div class="">
+        <span>Exempel på genomförda uppdrag och erfarenheter</span>
+        <span><button class="btn btn-light" (click)="setEditMode()">{{buttonText}}</button></span>
+      </div>
+        <!-- -->
+        <div [hidden]="!editMode">
+          <div class="form-group">
+              <label for="company">Företag:</label>
+              <input type="text" name="company" class="form-control" [(ngModel)]="newMission.company" required>
+            </div>
+      
+          <div class="form-group">
+            <label for="startdate">Startdatum:</label>
+            <input type="text" name="startdate" class="form-control" [(ngModel)]="newMission.startdate" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="enddate">Slutdatum:</label>
+            <input type="text" name="enddate" class="form-control" [(ngModel)]="newMission.enddate" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="role">Roll:</label>
+            <input type="text" name="role" class="form-control" [(ngModel)]="newMission.role" required>
+          </div>
+        
+          <div class="form-group">
+              <label for="techniques2">Tekniker:</label>
+              <input type="text" name="techniques2" class="form-control" [(ngModel)]="newMission.techniques" required>
+            </div>
+          
+          <div class="form-group">
+              <label for="description2">Beskrivning:</label>
+              <textarea rows="3" name="description2" class="form-control" [(ngModel)]="newMission.description" required></textarea>
+            </div>
+          
+          <button (click)="addMission()">Add</button> 
+
+        </div>
+       <!-- -->
+      </div>
+      </form>
+      <div [hidden]="editMode">
+        <ol >
+          <li *ngFor="let m of currentProfile.missions">
+            <table class="table table-sm">
+              <tr><th>{{m.company}}</th><th>{{m.startdate}} - {{m.enddate}}</th></tr>
+              <tr><th>Roll</th><td>{{m.role}}</td></tr>
+              <tr><th>Teknik</th><td>{{m.techniques}}</td></tr>
+              <tr><th>Beskrivning</th><td>{{m.description}}</td></tr>
+            </table>
+            
+          </li>
+        </ol>
+      </div>
+</div>
